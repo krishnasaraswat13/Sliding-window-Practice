@@ -1,0 +1,30 @@
+// User function Template for Java
+
+class Solution {
+    //rolling hash algorithm..> will discuss later
+    
+    int search(String pat, String txt) {
+        // code here
+        int cnt=0;
+        HashMap<Character,Integer> map=new HashMap<>();
+        HashMap<Character,Integer> stmap=new HashMap<>();
+        for(int i=0;i<pat.length();i++){
+            map.put(pat.charAt(i),map.getOrDefault(pat.charAt(i),0)+1);
+            stmap.put(txt.charAt(i),stmap.getOrDefault(txt.charAt(i),0)+1);
+        }
+        if(map.equals(stmap)){
+            cnt++;
+        }
+         for(int i=pat.length();i<txt.length();i++){
+             stmap.put(txt.charAt(i),stmap.getOrDefault(txt.charAt(i),0)+1);
+             stmap.put(txt.charAt(i-pat.length()),stmap.get(txt.charAt(i-pat.length()))-1);
+             if(stmap.get(txt.charAt(i-pat.length()))==0){
+                 stmap.remove(txt.charAt(i-pat.length()));
+             }
+              if(map.equals(stmap)){
+            cnt++;
+        }
+         }
+         return cnt;
+    }
+}

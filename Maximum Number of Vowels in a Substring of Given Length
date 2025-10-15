@@ -1,0 +1,24 @@
+class Solution {
+    public int maxVowels(String s, int k) {
+        ArrayList<Integer> ls=new ArrayList<>();
+        int max=0;
+        int n=s.length();
+        String vowels="aeiouAEIOU";
+        for(int i=0;i<k;i++){
+            if(vowels.indexOf(s.charAt(i)) != -1){
+                ls.add(i);
+            }
+        }
+        max=ls.size();
+        for(int i=k;i<n;i++){
+              if(vowels.indexOf(s.charAt(i)) != -1){
+                ls.add(i);
+            }
+            if(ls.contains(i-k)){
+            ls.remove(0);
+            }
+            max=Math.max(max,ls.size());
+        }
+        return max;
+    }
+}

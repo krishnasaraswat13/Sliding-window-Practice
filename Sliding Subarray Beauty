@@ -1,0 +1,39 @@
+class Solution {
+    public int[] getSubarrayBeauty(int[] nums, int k, int x) {
+        //PriorityQueue<Integer> pq=new PriorityQueue<>();
+        int n=nums.length;
+        int arr[]=new int[n-k+1];
+         int[] freq = new int[50];
+        for(int i=0;i<k;i++){
+                if(nums[i]<0){
+                    freq[nums[i]+50]++;
+                }
+        }
+         arr[0] = findXthSmallest(freq, x);
+
+        for (int i = k; i < n; i++) {
+            int oldNum = nums[i - k];
+            if (oldNum < 0) {
+                freq[oldNum + 50]--;
+            }
+            int newNum = nums[i];
+            if (newNum < 0) {
+                freq[newNum + 50]++;
+            }
+            arr[i - k + 1] = findXthSmallest(freq, x);
+        }
+
+        return arr;
+    }
+    public int findXthSmallest(int[] freq, int x) {
+        int negativeCount = 0;
+        for (int i = 0; i < 50; i++) {
+            negativeCount += freq[i];
+            if (negativeCount >= x) {
+                return i - 50;
+            }
+        }
+        return 0;
+    }
+    
+}

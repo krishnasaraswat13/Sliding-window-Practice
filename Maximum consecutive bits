@@ -1,0 +1,22 @@
+class Solution {
+    public int maxConsecBits(int[] nums) {
+        // code here
+        int start=0;
+        int end=0;
+        int max=Integer.MIN_VALUE;
+        int freq[]=new int[2];
+        while(end<nums.length){
+            freq[nums[end]]++;
+            while(nums[end]!=nums[start]){
+                
+                freq[nums[start]]--;
+                start++;
+            }
+            max=Math.max(max,Math.max(freq[0],freq[1]));
+            end++;
+            
+            
+        }
+        return max;
+    }
+}

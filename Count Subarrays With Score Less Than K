@@ -1,0 +1,27 @@
+class Solution {
+    public long countSubarrays(int[] nums, long k) {
+       
+        int i=0;
+        int j=0;
+        long score=0;
+       long cnt=0;
+        long sum=0;
+        while(j<nums.length){
+            sum+=nums[j];
+           
+             while(sum*(j-i+1)>=k){
+                sum-=nums[i];
+                i++;
+               
+            }
+           
+            cnt+=j-i+1;
+            j++;
+        }
+        // if(score<k &&j!=i){
+        //     cnt+=j-i-2;
+        // }
+    
+        return cnt;
+    }
+}

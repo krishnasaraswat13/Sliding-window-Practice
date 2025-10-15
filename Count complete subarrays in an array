@@ -1,0 +1,32 @@
+class Solution {
+    public int countCompleteSubarrays(int[] nums) {
+        int i=0,j=0;
+        int n=nums.length;
+        int cnt=0;
+        HashSet<Integer> set=new HashSet<>();
+        for(int m=0;m<n;m++){
+            set.add(nums[m]);
+        }
+        while(j<n){
+        if(set.contains(nums[j])){
+            set.remove(nums[j]);
+            if(set.size()==0){
+                cnt+=n-j;
+                i++;
+                j=i;
+                for(int m=0;m<n;m++){
+                    set.add(nums[m]);
+                }
+            }
+            else{
+                j++;
+            }
+        }
+        else{
+            j++;
+        }
+
+        }
+        return cnt;
+    }
+}
